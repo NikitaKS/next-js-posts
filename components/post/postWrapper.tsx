@@ -1,14 +1,18 @@
 import * as React from "react";
-import {INote} from "../../helpers/types";
+import {IPost} from "../../helpers/types";
 
 interface IProps {
-    posts: INote[]
+    posts: IPost[]
 }
 
 const PostWrapper = (props: IProps) => {
+    debugger
+    const posts = props.posts.map((p) => {
+        return <div key={p.id}>{p.title}</div>
+    });
     return (
         <>
-
+            {posts}
         </>
     )
 };

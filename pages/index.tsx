@@ -1,23 +1,10 @@
 import * as React from "react";
-import Header from "../components/header/Header";
 import {withRedux} from "../redux/redux";
-import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
-import {getNotes} from "../bll/ThunkCreators";
-import PostWrapper from "../components/post/postWrapper";
-import {AppState} from "../redux/store";
+import Home from "./home";
 
-const Home = () => {
-    const dispatch = useDispatch();
-    const posts = useSelector((state:AppState)=>state.root.)
-    useEffect(()=>{
-        dispatch(getNotes())
-    },[]);
+const Index = () => {
     return (
-        <>
-            <Header/>
-            <PostWrapper posts={}/>
-        </>
+        <Home/>
     )
 };
-export default withRedux(Home);
+export default withRedux(Index);

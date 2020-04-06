@@ -1,15 +1,11 @@
-export interface INote {
+export interface IPost {
     title: string
     body: string
     id: number
 }
 
 export interface IComment {
-    author: string
-    content: string
-    createdAt: number
-    noteKey: string
-    commentKey: string
+
 }
 
 export enum Statuses {
