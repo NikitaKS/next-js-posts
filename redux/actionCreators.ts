@@ -8,6 +8,7 @@ export const SET_COMMENTS = 'nextJsPosts/helpers/constants/SET_COMMENTS';
 export const CHANGE_POST = 'nextJsPosts/helpers/constants/CHANGE_POST';
 export const DELETE_POST = 'nextJsPosts/helpers/constants/DELETE_POST';
 export const SET_NEW_COMMENT = 'nextJsPosts/helpers/constants/SET_NEW_COMMENT';
+export const CLOSE_SNACK = 'nextJsPosts/helpers/constants/CLOSE_SNACK';
 
 
 interface IGetPosts {
@@ -50,6 +51,10 @@ interface IAddComment {
     comment: IComment
 }
 
+interface ICLoseSnack {
+    type: typeof CLOSE_SNACK
+}
+
 export type AppActions = IGetPosts
     | ISetStatus
     | IAddPost
@@ -58,6 +63,7 @@ export type AppActions = IGetPosts
     | IChangePost
     | IDeletePost
     | IAddComment
+    | ICLoseSnack
 
 export const setPosts = (posts: IPost[]): IGetPosts => ({type: SET_POSTS, posts});
 export const setPost = (post: IPost): ISetPost => ({type: SET_POST, post});
@@ -67,3 +73,4 @@ export const setComments = (comments: IComment[]): ISetComments => ({type: SET_C
 export const setChangedPost = (post: IPost): IChangePost => ({type: CHANGE_POST, post});
 export const deletePostAC = (id: string): IDeletePost => ({type: DELETE_POST, id});
 export const setNewComment = (comment: IComment): IAddComment => ({type: SET_NEW_COMMENT, comment});
+export const closeSnack = (): ICLoseSnack => ({type: CLOSE_SNACK});

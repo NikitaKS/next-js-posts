@@ -1,6 +1,6 @@
 import {
     AppActions,
-    CHANGE_POST,
+    CHANGE_POST, CLOSE_SNACK,
     DELETE_POST,
     SET_COMMENTS, SET_NEW_COMMENT,
     SET_NEW_POST,
@@ -15,7 +15,8 @@ let initialState = {
     post: null as IPost,
     posts: [] as IPost[],
     comments: [] as IComment[],
-    status: Statuses.notInit
+    status: Statuses.notInit,
+    showSnack: false
 };
 
 type StateType = typeof initialState;
@@ -23,7 +24,6 @@ type StateType = typeof initialState;
 export const reducer = (state = initialState, action: AppActions): StateType => {
     switch (action.type) {
         case SET_STATUS: {
-            debugger
             return {...state, status: action.status}
         }
         case SET_POSTS: {
@@ -33,21 +33,27 @@ export const reducer = (state = initialState, action: AppActions): StateType => 
             return {...state, post: action.post}
         }
         case SET_NEW_POST: {
-            return {...state, posts: [...state.posts, action.post]}
+            return {...state, posts: [...state.posts, action.post], showSnack: true}
         }
         case SET_COMMENTS: {
             return {...state, comments: action.comments}
         }
         case CHANGE_POST: {
-            return {...state, post: action.post}
+            return {...state, post: action.post, showSnack: true}
         }
         case DELETE_POST: {
-            return {...state, posts: state.posts.filter((p) => p.id === action.id)}
+            return {...state, posts: state.posts.filter((p) => p.id === action.id), showSnack: true}
         }
         case SET_NEW_COMMENT: {
             return {
                 ...state,
                 comments: [...state.comments, action.comment]
+            }
+        }
+        case CLOSE_SNACK: {
+            return {
+                ...state,
+                showSnack: false
             }
         }
         default: {

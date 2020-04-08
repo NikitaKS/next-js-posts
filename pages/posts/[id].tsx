@@ -7,7 +7,7 @@ import {withRedux} from "../../redux/redux";
 import Post from "../../components/posts/Post";
 import {addComment, changePost, deletePost, getComments, getPost} from "../../redux/ThunkCreators";
 import withLayout from "../withLayout";
-import {IPost} from "../../helpers/types";
+import {IPost, Statuses} from "../../helpers/types";
 import {apiPosts} from "../../dal/api";
 import {Container} from "../../globalStyles/globalStyles";
 import Comment from "../../components/comment/Comment";
@@ -26,7 +26,7 @@ const Id: FC<IProps> = (props) => {
     const post = useSelector((state: AppState) => state.root.post);
     const comments = useSelector((state: AppState) => state.root.comments
         .map((c) => <Comment key={c.id} body={c.body} id={c.postId}/>));
-
+    const status = useSelector((state: AppState) => state.root.status);
     useEffect(() => {
         if (id) {
             dispatch(getPost(id));
@@ -38,7 +38,8 @@ const Id: FC<IProps> = (props) => {
     }, [id]);
 
     const handleDeletePost = (id: string) => {
-        dispatch(deletePost(id))
+        dispatch(deletePost(id));
+        router.push('/');
     };
     const handleChangePost = (id: string, title: string, body: string) => {
         const changedPost = {title, body};
@@ -50,8 +51,6 @@ const Id: FC<IProps> = (props) => {
     return (
         <div>
             <Container>
-                {/*<Post handleChangePost={handleChangePost} post={props.post || post}*/}
-                {/*      handleDeletePost={handleDeletePost}/>*/}
                 <Post handleChangePost={handleChangePost} post={post === null ? props.post : post}
                       handleDeletePost={handleDeletePost}/>
                 <CommentWrapper>
