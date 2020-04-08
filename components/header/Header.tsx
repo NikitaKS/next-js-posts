@@ -1,33 +1,38 @@
 import Link from 'next/link';
-import s from './header.module.css'
+import React from 'react';
+import {NavWrapper, StyledToolbar} from "./HeaderCSS";
+import {Container} from "../../globalStyles/globalStyles";
+import AppBar from '@material-ui/core/AppBar';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import CustomizedSnackbars from "../snackBar/snackBar";
+import {withRedux} from "../../redux/redux";
 
-const Header = () => (
-    <div className={s.container}>
-        <header className={s.headerWrapper}>
-            <ul>
-                <li>
-                    <Link href="/">
-                        <a>Home</a>
-                    </Link>
-                </li>
-                <li>
-                    <Link href="/about">
-                        <a>About</a>
-                    </Link>
-                </li>
-                <li>
-                    <Link href="/post/[id]" as="/post/first">
-                        <a>First Post</a>
-                    </Link>
-                </li>
-                <li>
-                    <Link href="/post/[id]" as="/post/second">
-                        <a>Second Post</a>
-                    </Link>
-                </li>
-            </ul>
-        </header>
-    </div>
-)
+const Header = () => {
+    return (
+        <Container>
+            <AppBar position="static">
+                <StyledToolbar>
+                    <Typography variant="h4">
+                        NK
+                    </Typography>
+                    <NavWrapper>
+                        <Link href={'/'}>
+                            <Button variant="contained" color="secondary">
+                                Home
+                            </Button>
+                        </Link>
+                        <Link href={'/posts/new'}>
+                            <Button variant="contained" color="secondary">
+                                Create Post
+                            </Button>
+                        </Link>
+                    </NavWrapper>
+                </StyledToolbar>
+            </AppBar>
+            <CustomizedSnackbars/>
+        </Container>
+    )
+};
 
 export default Header;

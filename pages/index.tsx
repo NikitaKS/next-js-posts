@@ -4,7 +4,9 @@ import Home from "./home";
 
 const Index = () => {
     return (
-        <Home/>
+        <>
+            <Home/>
+        </>
     )
 };
 export default withRedux(Index);

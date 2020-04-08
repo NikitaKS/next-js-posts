@@ -1,11 +1,13 @@
 export interface IPost {
     title: string
     body: string
-    id: number
+    id?: string
 }
 
 export interface IComment {
-
+    id: number,
+    postId: string,
+    body: string
 }
 
 export enum Statuses {

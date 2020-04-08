@@ -1,10 +1,12 @@
 import React from 'react'
 import {Provider} from 'react-redux'
-// import {initializeStore} from '../store'
-// import App from 'next/app'
 import store from "./store";
 
-export const withRedux = (PageComponent, {ssr = true} = {}) => {
+interface WithInitialReduxStateType {
+    initialReduxState?: any
+}
+
+export const withRedux = (PageComponent, {ssr = true} = {}): React.ComponentType<WithInitialReduxStateType> => {
     return ({initialReduxState, ...props}) => {
         // const store = getOrInitializeStore(initialReduxState)
         return (

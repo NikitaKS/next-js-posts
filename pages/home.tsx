@@ -1,23 +1,19 @@
 import * as React from "react";
-import Header from "../components/header/Header";
-import {withRedux} from "../redux/redux";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
-import PostWrapper from "../components/post/postWrapper";
 import {AppState} from "../redux/store";
-import {getPosts} from "../bll/ThunkCreators";
+import {getPosts} from "../redux/ThunkCreators";
+import PostsContainer from "../components/posts/PostsContainer";
+import withLayout from "./withLayout";
 
-const Home = (props:any) => {
+const Home: React.FC = () => {
     const dispatch = useDispatch();
     const posts = useSelector((state: AppState) => state.root.posts);
     useEffect(() => {
         dispatch(getPosts())
     }, []);
     return (
-        <>
-            <Header/>
-            {/*<PostWrapper posts={posts}/>*/}
-        </>
+        <PostsContainer posts={posts}/>
     )
 };
-export default (Home);
+export default withLayout(Home);

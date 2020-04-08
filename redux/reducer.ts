@@ -1,20 +1,53 @@
-import {GET_POSTS} from "../helpers/constants";
-import {IPost} from "../helpers/types";
-import {AppActions} from "../bll/actionCreators";
+import {
+    AppActions,
+    CHANGE_POST,
+    DELETE_POST,
+    SET_COMMENTS, SET_NEW_COMMENT,
+    SET_NEW_POST,
+    SET_POST,
+    SET_POSTS,
+    SET_STATUS
+} from "./actionCreators";
+import {IComment, IPost, Statuses} from "../helpers/types";
 
 
 let initialState = {
-    posts: [] as IPost[]
+    post: null as IPost,
+    posts: [] as IPost[],
+    comments: [] as IComment[],
+    status: Statuses.notInit
 };
 
 type StateType = typeof initialState;
 
 export const reducer = (state = initialState, action: AppActions): StateType => {
     switch (action.type) {
-        case GET_POSTS: {
+        case SET_STATUS: {
+            debugger
+            return {...state, status: action.status}
+        }
+        case SET_POSTS: {
+            return {...state, posts: action.posts}
+        }
+        case SET_POST: {
+            return {...state, post: action.post}
+        }
+        case SET_NEW_POST: {
+            return {...state, posts: [...state.posts, action.post]}
+        }
+        case SET_COMMENTS: {
+            return {...state, comments: action.comments}
+        }
+        case CHANGE_POST: {
+            return {...state, post: action.post}
+        }
+        case DELETE_POST: {
+            return {...state, posts: state.posts.filter((p) => p.id === action.id)}
+        }
+        case SET_NEW_COMMENT: {
             return {
                 ...state,
-                posts: action.posts
+                comments: [...state.comments, action.comment]
             }
         }
         default: {
